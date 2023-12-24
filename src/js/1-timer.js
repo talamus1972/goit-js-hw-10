@@ -11,6 +11,13 @@ import "izitoast/dist/css/iziToast.min.css";
 let userSelectedDate;
 const input = document.querySelector("#datetime-picker");
 const button = document.querySelector("button");
+button.setAttribute('disabled', 'true');
+button.classList.add("start");
+const dataDays = document.querySelector('span[data-days]');
+const dataHours = document.querySelector('span[data-hours]');
+const dataMinutes = document.querySelector('span[data-minutes]');
+const dataSeconds = document.querySelector('span[data-seconds]');
+
 
 const options = {
   enableTime: true,
@@ -18,25 +25,41 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
     onClose(selectedDates) {
-        if (selectedDates < new Date()) {
+         console.log(selectedDates[0]);
+        if (selectedDates[0] < options.defaultDate) {
+            button.setAttribute('disabled', 'true');
+            // window.alert("Please choose a date in the future");
         iziToast.show({
-        position: 'topRight',
+            position: 'topRight',
+            messageColor: '#FFFFFF',
+            backgroundColor: '#EF4040',
+            messageSize: '16px',
+            messageLineHeight: '1.5',
         message: 'Please choose a date in the future',
       });
-        button.setAttribute("disabled", true);
         }
-        button.removeAttribute("disabled");
-       userSelectedDate = selectedDates[0];
+        button.removeAttribute('disabled')
+        userSelectedDate = selectedDates[0];              
     },
 };
 
-const datePicker = flatpickr(input, options);
+flatpickr(input, options);
 
-// const datePicker = flatpickr(refs.dateTimePicker, options);
+button.addEventListener("click", () => {
+     
+    setInterval(() => {
+        const selectedDateTime = userSelectedDate;
+        const currentDateTime = Date.now();
+        const timerTime = selectedDateTime - currentDateTime;
+        const result = convertMs(timerTime);
+dataDays.textContent = `${result.days}`
+dataHours.textContent = `${result.hours}`
+dataMinutes.textContent = `${result.minutes}`
+dataSeconds.textContent = `${result.seconds}`
+  }, 1000);
+});
 
-// refs.dateTimePicker.addEventListener('focus', () => {
-//   datePicker.config.defaultDate = new Date();
-// });
+
 
 function convertMs(ms) {
   // Number of milliseconds per unit of time
@@ -57,11 +80,7 @@ function convertMs(ms) {
   return { days, hours, minutes, seconds };
 }
 
-console.log(convertMs(2000)); // {days: 0, hours: 0, minutes: 0, seconds: 2}
-console.log(convertMs(140000)); // {days: 0, hours: 0, minutes: 2, seconds: 20}
-console.log(convertMs(24140000)); // {days: 0, hours: 6 minutes: 42, seconds: 20}
 
 
 
-datePicker.selectedDates[0];
-console.log("Outside onClose():", userSelectedDate);
+
