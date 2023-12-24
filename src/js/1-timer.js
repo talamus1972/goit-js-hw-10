@@ -46,8 +46,8 @@ const options = {
 flatpickr(input, options);
 
 button.addEventListener("click", () => {
-     
-    setInterval(() => {
+      button.setAttribute('disabled', 'true');
+   const interval = setInterval(() => {
         const selectedDateTime = userSelectedDate;
         const currentDateTime = Date.now();
         const timerTime = selectedDateTime - currentDateTime;
@@ -56,6 +56,11 @@ dataDays.textContent = `${result.days}`
 dataHours.textContent = `${result.hours}`
 dataMinutes.textContent = `${result.minutes}`
 dataSeconds.textContent = `${result.seconds}`
+        if (timerTime <= 0) {
+            clearInterval(interval);
+
+             console.log('Interval cleared');
+        }
   }, 1000);
 });
 
