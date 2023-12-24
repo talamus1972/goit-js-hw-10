@@ -46,7 +46,11 @@ const options = {
 flatpickr(input, options);
 
 button.addEventListener("click", () => {
-      button.setAttribute('disabled', 'true');
+    button.setAttribute('disabled', 'true');
+
+    const addLeadingZero = (value) => {
+        return value.toString().padStart(2, '0');
+    }
    const interval = setInterval(() => {
         const selectedDateTime = userSelectedDate;
         const currentDateTime = Date.now();
@@ -56,7 +60,20 @@ dataDays.textContent = `${result.days}`
 dataHours.textContent = `${result.hours}`
 dataMinutes.textContent = `${result.minutes}`
 dataSeconds.textContent = `${result.seconds}`
-        if (timerTime <= 0) {
+       
+const formattedDays = addLeadingZero(result.days);
+const formattedHours = addLeadingZero(result.hours);
+const formattedMinutes = addLeadingZero(result.minutes);
+const formattedSeconds = addLeadingZero(result.seconds);
+       
+        dataDays.textContent = formattedDays;
+        dataHours.textContent = formattedHours;
+        dataMinutes.textContent = formattedMinutes;
+        dataSeconds.textContent = formattedSeconds;
+
+
+     const zeroTime = result.days + result.hours + result.minutes + result.seconds;
+        if (zeroTime === 0) {
             clearInterval(interval);
 
              console.log('Interval cleared');
