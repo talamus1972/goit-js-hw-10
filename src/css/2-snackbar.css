@@ -1,0 +1,27 @@
+.input {
+    display: flex;
+    width: 360px;
+    height: 40px;
+    justify-content: center;
+    align-items: center;
+    margin: 8px 0 16px 0;
+}
+
+.fieldset {
+    width: 340px;
+    height: 64px;
+}
+
+.button {
+    display: flex;
+    width: 360px;
+    padding: 8px 16px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 8px;
+    background: #4E75FF;
+    color: #FFFFFF;
+    width: 370px;
+    margin-top: 32px;
+}
