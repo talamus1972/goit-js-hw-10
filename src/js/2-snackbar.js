@@ -15,46 +15,49 @@ const button = document.querySelector('button');
 button.classList.add('button');
 
 
-const promise = new Promise((resolve, reject) => {
+ const promise = new Promise((resolve, reject) => {
   form.addEventListener('submit', event => {
     event.preventDefault();
    let delay = input.value;
     setTimeout(() => {
     
-    if (fulfilled.checked) {
+
+      
+      if (fulfilled.checked) {
+    
       resolve(delay);
-      console.log(delay);
+     
     } 
-    else if (rejected.checked) {
       reject(delay);
-    console.log(delay);
-    }
+     
+        
     },delay);
   });
+
 });
 
 promise
-  .then(delay => {
+  .then(result => {
     iziToast.success({
       position: 'topRight',
       messageColor: '#FFFFFF',
       backgroundColor: '#59A10D',
       messageSize: '16px',
       messageLineHeight: '1.5',
-      message: `✅ Fulfilled promise in ${delay}ms`,
+      message: `✅ Fulfilled promise in ${result}ms`,
     });
-      form.reset();
+   console.log(result);
   })
-  .catch(delay => {
+  .catch(result1 => {
     iziToast.error({
       position: 'topRight',
       messageColor: '#FFFFFF',
       backgroundColor: '#EF4040',
       messageSize: '16px',
       messageLineHeight: '1.5',
-      message: `❌ Rejected promise in ${delay}ms`,
+      message: `❌ Rejected promise in ${result1}ms`,
     });
-      form.reset();
+      console.log(result1);
   });
 
 //   const input = document.getElementsByTagName('input')[0];
