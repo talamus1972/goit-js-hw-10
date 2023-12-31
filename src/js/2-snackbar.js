@@ -20,7 +20,7 @@ button.classList.add('button');
     event.preventDefault();
 
     let delay = input.value;
-    
+  
     setTimeout(() => {
          
       if (fulfilled.checked) {
@@ -44,7 +44,7 @@ promise
       messageLineHeight: '1.5',
       message: `✅ Fulfilled promise in ${delay}ms`,
     });
-  
+     
   })
   .catch(delay => {
     iziToast.error({
@@ -55,7 +55,7 @@ promise
       messageLineHeight: '1.5',
       message: `❌ Rejected promise in ${delay}ms`,
     });
-      
+       
   });
 
 
