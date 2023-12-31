@@ -10,7 +10,7 @@ input.classList.add("input");
 const fieldset = document.querySelector('fieldset');
 fieldset.classList.add('fieldset');
 const fulfilled = document.getElementsByTagName('input')[1];
-// const rejected = document.getElementsByTagName('input')[2];
+const rejected = document.getElementsByTagName('input')[2];
 const button = document.querySelector('button');
 button.classList.add('button');
 
@@ -18,14 +18,18 @@ button.classList.add('button');
 const promise = new Promise((resolve, reject) => {
   form.addEventListener('submit', event => {
     event.preventDefault();
-   let delay = form.delay.value;
-  
+   let delay = input.value;
+    setTimeout(() => {
+    
     if (fulfilled.checked) {
       resolve(delay);
-      
+      console.log(delay);
     } 
+    else if (rejected.checked) {
       reject(delay);
     console.log(delay);
+    }
+    },delay);
   });
 });
 
@@ -39,6 +43,7 @@ promise
       messageLineHeight: '1.5',
       message: `✅ Fulfilled promise in ${delay}ms`,
     });
+      form.reset();
   })
   .catch(delay => {
     iziToast.error({
@@ -49,6 +54,7 @@ promise
       messageLineHeight: '1.5',
       message: `❌ Rejected promise in ${delay}ms`,
     });
+      form.reset();
   });
 
 //   const input = document.getElementsByTagName('input')[0];
